@@ -4,6 +4,8 @@
 
 Spring Boot.
 
+Maven.
+
 Thymeleaf.
 
 Java.
@@ -25,6 +27,8 @@ H2 Base de Datos en Memoria.
 Java Jdk 8 o superior.
 
 Ide Spring Tool Suite 4 o superior (De Preferencia).
+
+Una vez descargado el proyecto importar con Maven.
 
 # En La Base de Datos H2 se poblan datos de Conductores y Vehiculos Automaticamente
 
