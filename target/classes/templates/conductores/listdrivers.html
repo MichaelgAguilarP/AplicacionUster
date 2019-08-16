@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout :: head"> </head>
+<body>
+		<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<h4 class="card-title">
+					<a th:href="@{/formdrivers}" class="btn btn-primary">Crear Conductor</a>
+				</h4>
+			<table class="table table-sdrivered">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Licencia</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="driver: ${drivers}">
+						<td th:text="${driver.id}"></td>
+						<td th:text="${driver.name}"></td>
+						<td th:text="${driver.surname}"></td>
+						<td th:text="${driver.license}"></td>
+						<td><a class="btn btn-primary btn-xs" th:href="@{/formdrivers/} + ${driver.id}" th:text="'editar'"></a></td>
+						<td><a class="btn btn-danger btn-xs" th:href="@{/eliminardrivers/} + ${driver.id}" th:text="'eliminar'" onclick="return confirm('Est�s seguro que quieres eliminar el Conductor?');"></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+		
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+	
+</body>
+</html>

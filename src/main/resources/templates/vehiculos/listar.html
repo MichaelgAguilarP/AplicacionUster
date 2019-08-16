@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout :: head"> </head>
+<body>
+		<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/form}" class="btn btn-primary">Crear Vehiculo</a>
+				</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Marca</th>
+						<th>Modelo</th>
+						<th>Placas</th>
+						<th>Licencia Requerida</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="vehiculo: ${vehiculos}">
+						<td th:text="${vehiculo.id}"></td>
+						<td th:text="${vehiculo.brand}"></td>
+						<td th:text="${vehiculo.model}"></td>
+						<td th:text="${vehiculo.plate}"></td>
+						<td th:text="${vehiculo.license}"></td>
+						<td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${vehiculo.id}" th:text="'editar'"></a></td>
+						<td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${vehiculo.id}" th:text="'eliminar'" onclick="return confirm('Estas seguro que quieres eliminar el Vehiculo?');"></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+		
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+	
+</body>
+</html>

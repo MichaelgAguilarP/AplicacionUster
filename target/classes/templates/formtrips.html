@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-secundary">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div th:object="${trips}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+						<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+				<form th:action="@{/formtrips}" th:object="${trips}" method="post">
+
+<!-- 					<div class="form-group row"> 
+						<label class="col-sm-2 col-form-label">Fecha *</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{date}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></small>
+						</div>
+					</div>-->
+					<p> * Obligatorios </p>
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Fecha *</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" th:field="*{date}"
+								th:value="${trips.date}" required name="datepicker"
+								placeholder="MM/dd/yyyy" id="datepicker"
+								width="276" 	
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></small>
+						</div>
+					</div>
+					
+
+					<!-- 					 					<div class="form-group row">  
+						<label class="col-sm-2 col-form-label">Vehiculo *</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{ents}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('ents')}" th:errors="*{ents}"></small>
+						</div>
+					</div>-->
+
+					<div class="form-group row">
+						<label class="col-sm-6 col-form-label">Conductor *</label> <select
+							th:field="*{ents.id}">
+							<option value="1">--</option>
+							<option class="form-text text-primary"
+								th:each="listDrivers : ${listaDrivers}"
+								th:value="${listDrivers.id}"
+								th:utext="${listDrivers.name} + ' - ' + ${listDrivers.surname}" />
+						</select>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-6 col-form-label">Vehiculo *</label> <select
+							th:field="*{veh.id}">
+							<option value="1">--</option>
+							<option class="form-text text-primary"
+								th:each="listVehs : ${listaVehiculos}" th:value="${listVehs.id}"
+								th:utext="${listVehs.brand}" />
+						</select>
+					</div>
+					<!-- 					<div class="form-group row"> 
+						<label class="col-sm-2 col-form-label">Conductor *</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{veh}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('veh')}" th:errors="*{veh}"></small>
+						</div>
+					</div>-->
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Crear Viaje" class="btn btn-primary" />
+						</div>
+					</div>
+					<input type="hidden" th:field="*{id}" />
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
